@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hours Meter</title>
+    <style>
+      div#meter-container {
+        border: 1px solid #000;
+        height: 300px;
+        width: 100px;
+      }
+      div#mercury {
+        background-color: #FF0000;
+        position: fixed;
+        height: 0px;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Hours Served</h3>
+    <div id="meter-container"> <div id="mercury"></div> </div>
+
+    <script>
+      var goal = 10000;
+      var curr = 5000;
+      var min_height = 0;
+      var max_height = 300;
+      var merc = document.querySelector("#mercury");
+
+      function init() {
+        merc.style.height = ((curr / goal) * max_height) + 'px';
+      }
+
+      window.onload = function () {
+        init();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hours Meter</title>
+    <style>
+      div#meter-container {
+        border: 1px solid #000;
+        height: 180px;
+        width: 75px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Hours Served</h3>
+
+    <div id="meter-container"><canvas id="meter"></canvas></div> <br />
+    <input type="text" id="meter_value" value="0" />
+    <input type="button" onclick="update_meter(document.querySelector('#meter_value').value)" value="Update" />
+
+    <br /><br />
+    <input type="text" id="debug" value="0" />
+
+    <script>
+      var goal = 10000;
+      var curr = 1000;
+      var max_heigth = 200;
+      var canvas = document.querySelector("#meter").getContext("2d");
+
+      function init() {
+        document.querySelector("#meter_value").value = curr;
+        draw_meter();
+        draw_text();
+      }
+
+      function debug() {
+        document.querySelector("#debug").value = (curr / goal) * max_heigth;
+      }
+
+      function draw_meter() {
+        clear_meter();
+        update_meter(curr);
+      }
+
+      function clear_meter() {
+        canvas.fillStyle = 'rgb(255, 255, 255)';
+        canvas.fillRect(10, 10, 30, max_heigth);
+      }
+
+      function update_meter(c) {
+        curr = c;
+        clear_meter();
+        canvas.fillStyle = 'rgb(255, 0, 0)';
+        canvas.fillRect(10, 10, 30, (curr / goal) * max_heigth);
+        debug();
+      }
+
+      function draw_text() {
+        canvas.strokeStyle = "black";
+        canvas.strokeText("0", 45, 20);
+        canvas.strokeText("500", 45, 35);
+        canvas.strokeText("1000", 45, 50);
+        canvas.strokeText("2000", 45, 70);
+        canvas.strokeText("4000", 45, 90);
+        canvas.strokeText("6000", 45, 110);
+        canvas.strokeText("8000", 45, 130);
+        canvas.strokeText("10000", 45, 150);
+      }
+
+      window.onload = function () {
+        init();
+      };
+    </script>
+  </body>
+</html>
